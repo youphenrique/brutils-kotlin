@@ -1,4 +1,4 @@
-import dev.brutils.build.SyncSpec
+import dev.brutils.gradle.SyncSpec
 
 // Applied to the root project only; library tests depend on :syncSpec through brutils.kotlin-library.
 tasks.register<SyncSpec>("syncSpec") {

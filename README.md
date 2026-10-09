@@ -3,7 +3,7 @@
 Brazilian utilities for **Kotlin and Java 17+**: validation, formatting, and generation of CPF, CNPJ (including the
 alphanumeric format), CEP, and more.
 
-The JVM sibling of [brutils](https://github.com/youphenrique/brutils) (TypeScript). Both implementations run the
+The JVM sibling of [brutils](https://github.com/youphenrique/brutils-js) (TypeScript). Both implementations run the
 same language-neutral conformance cases, so a CPF that is valid in one is valid in the other.
 
 > **Status:** scaffold. No module is published yet.
@@ -51,7 +51,7 @@ dependencies {
 ./gradlew build
 ```
 
-Tests run against the conformance cases in [`spec/`](https://github.com/youphenrique/brutils/tree/main/spec) of the
+Tests run against the conformance cases in [`spec/`](https://github.com/youphenrique/brutils-js/tree/main/spec) of the
 brutils repository, pinned by `brutils.spec.ref` in `gradle.properties`. To test against a local checkout instead:
 
 ```bash

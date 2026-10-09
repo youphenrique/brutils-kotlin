@@ -1,7 +1,7 @@
 # brutils-kotlin
 
 Guidelines for AI coding agents and human contributors working on `brutils-kotlin`, the JVM implementation of
-[brutils](https://github.com/youphenrique/brutils).
+[brutils](https://github.com/youphenrique/brutils-js).
 
 ---
 
