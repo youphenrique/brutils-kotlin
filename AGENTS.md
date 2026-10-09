@@ -41,7 +41,7 @@ Packages follow `dev.brutils.<module>` (for example `dev.brutils.cpf`). Each lib
 | Task                                  | Command                                              |
 | :------------------------------------ | :--------------------------------------------------- |
 | Lint, ABI check, and test everything  | `./gradlew build`                                    |
-| Test against a local brutils checkout | `./gradlew build -Pbrutils.spec.dir=../brutils/spec` |
+| Test against a local spec checkout    | `./gradlew build -Pbrutils.spec.dir=../brutils-spec` |
 | Run one module's tests                | `./gradlew :brutils-core:test`                       |
 | Fix formatting                        | `./gradlew ktlintFormat`                             |
 | Accept an intended public API change  | `./gradlew updateKotlinAbi`                          |
@@ -55,9 +55,10 @@ Packages follow `dev.brutils.<module>` (for example `dev.brutils.cpf`). Each lib
 
 ### 1. The spec is the source of truth
 
-Behavior is defined by the language-neutral cases in `spec/` of the brutils repository, synced into
-`build/brutils-spec` by the root `syncSpec` task and loaded in tests through `dev.brutils.spec.Spec`. A behavior change
-starts in the spec; this repository then bumps `brutils.spec.ref` to the new commit SHA and makes the tests pass.
+Behavior is defined by the language-neutral cases in [brutils-spec](https://github.com/youphenrique/brutils-spec),
+synced into `build/brutils-spec` by the root `syncSpec` task and loaded in tests through `dev.brutils.spec.Spec`. A
+behavior change starts in the spec; this repository then bumps `brutils.spec.ref` to the new commit SHA and makes the
+tests pass.
 Kotlin-only concerns (Java interop, nullability, exception types) are tested here.
 
 ### 2. Java interop is part of the API

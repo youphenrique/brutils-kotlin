@@ -51,11 +51,11 @@ dependencies {
 ./gradlew build
 ```
 
-Tests run against the conformance cases in [`spec/`](https://github.com/youphenrique/brutils-js/tree/main/spec) of the
-brutils repository, pinned by `brutils.spec.ref` in `gradle.properties`. To test against a local checkout instead:
+Tests run against the conformance cases in [brutils-spec](https://github.com/youphenrique/brutils-spec), pinned by
+`brutils.spec.ref` in `gradle.properties`. To test against a local checkout instead:
 
 ```bash
-./gradlew build -Pbrutils.spec.dir=../brutils/spec
+./gradlew build -Pbrutils.spec.dir=../brutils-spec
 ```
 
 See [AGENTS.md](AGENTS.md) for conventions.

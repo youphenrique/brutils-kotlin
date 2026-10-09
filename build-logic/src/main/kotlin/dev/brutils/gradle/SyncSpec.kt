@@ -18,7 +18,7 @@ import java.net.URI
 import javax.inject.Inject
 
 /**
- * Copies the language-neutral conformance cases (`spec/` of youphenrique/brutils-js) into [outputDir].
+ * Copies the language-neutral conformance cases (youphenrique/brutils-spec) into [outputDir].
  *
  * Uses [localDir] when set; otherwise downloads the repository archive at [ref], which must be a full commit SHA
  * so the task stays reproducible and up to date between runs.
@@ -52,21 +52,20 @@ abstract class SyncSpec : DefaultTask() {
             return
         }
 
-        val archive = temporaryDir.resolve("brutils.tar.gz")
-        URI("https://codeload.github.com/youphenrique/brutils-js/tar.gz/${ref.get()}").toURL().openStream().use { input ->
+        val archive = temporaryDir.resolve("brutils-spec.tar.gz")
+        URI("https://codeload.github.com/youphenrique/brutils-spec/tar.gz/${ref.get()}").toURL().openStream().use { input ->
             archive.outputStream().use { input.copyTo(it) }
         }
         fs.sync {
-            // Archive entries look like brutils-js-<sha>/spec/<module>/cases.json; keep the part after spec/.
+            // Archive entries look like brutils-spec-<sha>/<module>/cases.json; drop the top-level directory.
             from(archives.tarTree(archives.gzip(archive))) {
-                include("*/spec/**")
-                eachFile { relativePath = RelativePath(true, *relativePath.segments.drop(2).toTypedArray()) }
+                eachFile { relativePath = RelativePath(true, *relativePath.segments.drop(1).toTypedArray()) }
                 includeEmptyDirs = false
             }
             into(outputDir)
         }
         if (outputDir.asFileTree.isEmpty) {
-            throw GradleException("youphenrique/brutils-js has no spec/ directory at ${ref.get()}.")
+            throw GradleException("youphenrique/brutils-spec has no files at ${ref.get()}.")
         }
     }
 }
