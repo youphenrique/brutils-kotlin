@@ -1,0 +1,76 @@
+public abstract interface class dev/brutils/ValidationResult {
+	public abstract fun isValid ()Z
+}
+
+public final class dev/brutils/ValidationResult$Invalid : java/lang/Record, dev/brutils/ValidationResult {
+	public fun <init> (Ljava/lang/Exception;)V
+	public final fun component1 ()Ljava/lang/Exception;
+	public final fun copy (Ljava/lang/Exception;)Ldev/brutils/ValidationResult$Invalid;
+	public static synthetic fun copy$default (Ldev/brutils/ValidationResult$Invalid;Ljava/lang/Exception;ILjava/lang/Object;)Ldev/brutils/ValidationResult$Invalid;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun error ()Ljava/lang/Exception;
+	public fun hashCode ()I
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/brutils/ValidationResult$Valid : dev/brutils/ValidationResult {
+	public static final field INSTANCE Ldev/brutils/ValidationResult$Valid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/brutils/cpf/Cpf {
+	public static final field FORMATTED_PATTERN Ljava/lang/String;
+	public static final field INSTANCE Ldev/brutils/cpf/Cpf;
+	public static final field LENGTH I
+	public static final field RAW_PATTERN Ljava/lang/String;
+	public static final fun format (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun formatAsYouType (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun generate ()Ljava/lang/String;
+	public static final fun generate (Z)Ljava/lang/String;
+	public static final fun generate (ZLkotlin/random/Random;)Ljava/lang/String;
+	public static synthetic fun generate$default (ZLkotlin/random/Random;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun mask (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun mask (Ljava/lang/String;Ldev/brutils/cpf/CpfMaskMode;)Ljava/lang/String;
+	public static final fun mask (Ljava/lang/String;Ldev/brutils/cpf/CpfMaskMode;Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun mask$default (Ljava/lang/String;Ldev/brutils/cpf/CpfMaskMode;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun normalize (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun validate (Ljava/lang/String;)Ldev/brutils/ValidationResult;
+}
+
+public final class dev/brutils/cpf/CpfErrorCode : java/lang/Enum {
+	public static final field INVALID_CHECKSUM Ldev/brutils/cpf/CpfErrorCode;
+	public static final field INVALID_FORMAT Ldev/brutils/cpf/CpfErrorCode;
+	public static final field INVALID_TYPE Ldev/brutils/cpf/CpfErrorCode;
+	public static final field REPEATED_DIGITS Ldev/brutils/cpf/CpfErrorCode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/brutils/cpf/CpfErrorCode;
+	public static fun values ()[Ldev/brutils/cpf/CpfErrorCode;
+}
+
+public final class dev/brutils/cpf/CpfException : java/lang/IllegalArgumentException {
+	public fun <init> (Ldev/brutils/cpf/CpfErrorCode;)V
+	public fun <init> (Ldev/brutils/cpf/CpfErrorCode;Ljava/lang/String;)V
+	public synthetic fun <init> (Ldev/brutils/cpf/CpfErrorCode;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCode ()Ldev/brutils/cpf/CpfErrorCode;
+}
+
+public final class dev/brutils/cpf/CpfMaskMode : java/lang/Enum {
+	public static final field Companion Ldev/brutils/cpf/CpfMaskMode$Companion;
+	public static final field PREFIX_SUFFIX Ldev/brutils/cpf/CpfMaskMode;
+	public static final field REDACTED Ldev/brutils/cpf/CpfMaskMode;
+	public static final field SUFFIX Ldev/brutils/cpf/CpfMaskMode;
+	public static final fun fromValue (Ljava/lang/String;)Ldev/brutils/cpf/CpfMaskMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getValue ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Ldev/brutils/cpf/CpfMaskMode;
+	public static fun values ()[Ldev/brutils/cpf/CpfMaskMode;
+}
+
+public final class dev/brutils/cpf/CpfMaskMode$Companion {
+	public final fun fromValue (Ljava/lang/String;)Ldev/brutils/cpf/CpfMaskMode;
+}
+

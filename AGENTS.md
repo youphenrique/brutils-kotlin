@@ -27,6 +27,8 @@ not its API shape: the API is idiomatic Kotlin and must read naturally from Java
 ```
 build-logic/          # Convention plugins: brutils.kotlin-library, brutils.publishing, brutils.spec
 brutils-core/         # Utilities; no dependencies beyond the Kotlin stdlib
+  dev/brutils/        # Shared pieces: ValidationResult, internal text helpers
+  dev/brutils/<module>/  # One package per module: an object (Cpf), its error code enum and exception, option enums
 brutils-jakarta/      # Jakarta Validation constraints built on brutils-core
 brutils-bom/          # Java platform aligning module versions
 ```
@@ -70,9 +72,12 @@ Kotlin-only concerns (Java interop, nullability, exception types) are tested her
 - Error codes are enums; errors are exceptions carrying the code, mirroring the TS module's `code` property.
 - Cover each public entry point with at least one test written in Java (`src/test/java`).
 
-### 3. No platform APIs in core logic
+### 3. Keep platform APIs contained
 
-`brutils-core` uses only the Kotlin stdlib (no `java.*` in main sources) so it can move to Kotlin Multiplatform later.
+`brutils-core` should be able to move to Kotlin Multiplatform later, so main sources use the Kotlin stdlib wherever it
+suffices. When only the JDK can do the job (for example Unicode categories of supplementary code points via
+`java.lang.Character`), keep the call inside an `internal` helper such as `dev.brutils.isMaskCodePoint`, never in a
+public signature.
 
 ### 4. Public API changes are deliberate
 

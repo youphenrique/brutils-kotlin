@@ -6,7 +6,7 @@ alphanumeric format), CEP, and more.
 The JVM sibling of [brutils](https://github.com/youphenrique/brutils-js) (TypeScript). Both implementations run the
 same language-neutral conformance cases, so a CPF that is valid in one is valid in the other.
 
-> **Status:** scaffold. No module is published yet.
+> **Status:** pre-release. CPF is implemented; nothing is published to Maven Central yet.
 
 ## Modules
 
@@ -37,6 +37,35 @@ dependencies {
     </dependency>
   </dependencies>
 </dependencyManagement>
+```
+
+## Usage
+
+```kotlin
+import dev.brutils.ValidationResult
+import dev.brutils.cpf.Cpf
+import dev.brutils.cpf.CpfMaskMode
+
+when (val result = Cpf.validate("522.639.446-21")) {
+    ValidationResult.Valid -> println("valid")
+    is ValidationResult.Invalid -> println(result.error.code) // INVALID_FORMAT, REPEATED_DIGITS, ...
+}
+
+Cpf.format("52263944621") // "522.639.446-21"
+Cpf.formatAsYouType("5226") // "522.6"
+Cpf.mask("52263944621", CpfMaskMode.PREFIX_SUFFIX) // "522.***.***-21"
+Cpf.generate(formatted = true) // a random valid CPF, for test fixtures
+```
+
+The same calls work from Java:
+
+```java
+ValidationResult<CpfException> result = Cpf.validate("522.639.446-21");
+if (result instanceof ValidationResult.Invalid<CpfException> invalid) {
+    System.out.println(invalid.error().getCode());
+}
+
+Cpf.mask("52263944621", CpfMaskMode.REDACTED, "#"); // "###.###.###-##"
 ```
 
 ## Compatibility
